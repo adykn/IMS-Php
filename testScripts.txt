@@ -1,0 +1,21 @@
+<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
+$_SERVER["PHP_SELF"] 
+if (is_numeric($var_name1))  
+is_string("")
+
+<div class="row">
+  <div class="col-md-9 col-md-push-3">.col-md-9 .col-md-push-3</div>
+  <div class="col-md-3 col-md-pull-9">.col-md-3 .col-md-pull-9</div>
+</div>
+
+
+<?php
+    mysql_connect("localhost", "root", "gm123") or die(mysql_error());
+    mysql_query("CREATE DATABASE cat") or die(mysql_error());
+    mysql_select_db("cat") or die(mysql_error());
+    mysql_query("CREATE TABLE user(username varchar(20), password varchar(20), permission varchar(20))") or die(mysql_error());
+    mysql_query("INSERT INTO user(username,password,permission) VALUES('gm','311807','admin')") or die(mysql_error());  
+    mysql_query("CREATE TABLE cattbl(id INT NOT NULL PRIMARY KEY ,name VARCHAR(30),roll INT NOT NULL,technology VARCHAR(30),semister VARCHAR(30),shift VARCHAR(30),bdate varchar(30),cell VARCHAR(30),address VARCHAR(30),picture LONGBLOB)") or die(mysql_error());        
+
+        header("Location: index.php");
+?>
