@@ -1,0 +1,8 @@
+git clone http://github.com/adykn/project.git
+______________
+git status
+________________
+git pull
+git add fileName.html | git add -A
+git commit -m "y the file was added"
+git push   

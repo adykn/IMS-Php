@@ -174,6 +174,28 @@ While ($rs=mysql_fetch_assoc($queryp)){
  @$_SESSION['Ssid'] =rand(1111111111,9999999999);
  }
  $Ssid= @$_SESSION['Ssid'];
+
+function getHTML($refid='0'){
+     
+  $myqd=@mysql_query('SELECT id,ref,level,title FROM `i_category` WHERE department="'.$_SESSION['department'].'" and ref='.$refid) or die('query failed .'); 
+  While ($rs=mysql_fetch_assoc($myqd)){ $space="";  for( $i = 0; $i<(($rs['level'])*5); $i++ ) { $space=$space."&nbsp";} ?>
+<tr role ='row'>
+     <td ><input type='checkbox' name='options' value='<?php echo enStr($rs['id']);?>'></td>
+     <td class='sorting_1'><?php echo $rs['id'];?></td>
+     <td ><?php $str=getVal('i_category','title','id='.$rs['ref']); echo ($str=='0')?'':$str ?></td>
+     <td ><?php echo $rs['level'];?></td>
+     <td ><?php echo $space.$rs['title'];?></td>
+<td ><center>
+                 <a href='?LstId=<?php echo enStr($rs['id'])?>&Area=Entry'><img src='assets/img/Edit.png'   ></a> | 
+                 <a href='?ref=<?php echo enStr($rs['id'])?>&Task=Delete'><img src='assets/img/Del.gif'     ></a> | 
+                  <a href='?ref=<?php echo enStr($rs['id'])?>&&AreaD=Details'><img src='assets/img/copy.gif' ></a> </center> 
+</td></tr> 
+<?php 
+getHTML($rs['id']);
+}
+
+}
+
 ?>
 <br>
 <?php if(isset($msg)){?><div Class='<?php echo @$msgStyle; ?>' id='msg2' role="alert">
@@ -233,38 +255,21 @@ While ($rs=mysql_fetch_assoc($queryp)){
 <center><div style='margin-top:50px;'><table id ='Tb1' class='table table-striped table-bordered dataTable' cellspacing='0' width='80%' role='grid' >
 <thead><tr role='row'>
 <th tabindex='0' aria-controls='Tb1' rowspan='1' colspan='1'><a href='#' OnClick='DelSelected();'><img src='assets/img/Del.gif'></a></th>
-   <th class='sorting' tabindex='1' aria-controls='Tb1' rowspan='1' colspan='1'>id</th>
-   <th class='sorting' tabindex='2' aria-controls='Tb1' rowspan='1' colspan='1'>ref</th>
-   <th class='sorting' tabindex='3' aria-controls='Tb1' rowspan='1' colspan='1'>level</th>
-   <th class='sorting' tabindex='4' aria-controls='Tb1' rowspan='1' colspan='1'>title</th>
+   <th class='sorting' tabindex='1' aria-controls='Tb1' rowspan='1' colspan='1'>Id</th>
+   <th class='sorting' tabindex='2' aria-controls='Tb1' rowspan='1' colspan='1'>Ref</th>
+   <th class='sorting' tabindex='3' aria-controls='Tb1' rowspan='1' colspan='1'>Levl</th>
+   <th class='sorting' tabindex='4' aria-controls='Tb1' rowspan='1' colspan='1'>Title</th>
    <th class='sorting' tabindex='0' aria-controls='Tb1' rowspan='1' colspan='1'>Edit</th>
 </tr></thead>
  <tfoot><tr>
    <th rowspan ='1' colspan='1'><a href='#' OnClick='DelSelected();'><img src='assets/img/Del.gif'></a></th>
-   <th rowspan ='1' colspan='1'>id</th>
-   <th rowspan ='1' colspan='1'>ref</th>
-   <th rowspan ='1' colspan='1'>level</th>
-   <th rowspan ='1' colspan='1'>title</th>
+   <th rowspan ='1' colspan='1'>Id</th>
+   <th rowspan ='1' colspan='1'>Ref</th>
+   <th rowspan ='1' colspan='1'>Level</th>
+   <th rowspan ='1' colspan='1'>Title</th>
    <th rowspan ='1' colspan='1'>Edit</th>
 </tr></tfoot><tbody>
-<?php   
- 	$imgSrc='B-False.png'; 
- 	$myqd=@mysql_query('SELECT id,ref,level,title FROM `i_category`') or die('query failed .');	
- 	While ($rs=mysql_fetch_assoc($myqd)){  
- 	//If($rs['status']=='1'){$imgSrc='B-True.png';}else{$imgSrc='B-False.png';}
- 	?>
-<tr role ='row'>
-     <td ><input type='checkbox' name='options' value='<?php echo enStr($rs['id']);?>'></td>
-     <td class='sorting_1'><?php echo $rs['id'];?></td>
-     <td ><?php echo getVal('i_category','title','id='.$rs['ref']);?></td>
-     <td ><?php echo getVal('s_selection','title','title='.$rs['level']);?></td>
-     <td ><?php echo $rs['title'];?></td>
-<td ><center>
-                 <a href='?LstId=<?php echo enStr($rs['id'])?>&Area=Entry'><img src='assets/img/Edit.png'   ></a> | 
-                 <a href='?ref=<?php echo enStr($rs['id'])?>&Task=Delete'><img src='assets/img/Del.gif'     ></a> | 
-	                <a href='?ref=<?php echo enStr($rs['id'])?>&&AreaD=Details'><img src='assets/img/copy.gif' ></a> </center> 
-</td></tr> 
-<?php }?>
+<?php getHTML();?>
 </tbody></table> </div></center>
               </div>
               <div id='tab3' class='tab-pane fade in <?php echo $activetab3;?>'>

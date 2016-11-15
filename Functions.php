@@ -1,9 +1,9 @@
 <?php
 if ($_SERVER['HTTP_HOST']=='localhost' || $_SERVER['HTTP_HOST']=='127.0.0.1'){
-@$conn=mysql_connect("localhost","root","") or die("connection failed");
+@$conn=mysql_connect("127.0.0.1","root","") or die("connection failed");
 @mysql_select_db ("db1",$conn) or die("db not found");
 }else{
- @$conn=mysql_connect("localhost","ideaorgp_dbadmin","myp1234!@#$") or die("Unable to Connect");
+ @$conn=mysql_connect("127.0.0.1","root","") or die("Unable to Connect");
  @mysql_select_db("db1") or die("Could not open the db");
 }
 
@@ -121,5 +121,10 @@ function encode64($input) {
 
 function decode64($input) {
  return base64_decode(strtr($input, '-_,', '+/='));
+}
+
+function toName($value)
+{
+	return ucfirst($value);
 }
 ?>

@@ -438,7 +438,7 @@ While ($rs=mysql_fetch_assoc($queryp)){
 			        .tbl-qa .table-row td {padding:10px;background-color: #FDFDFD;}
 			</style>
             
-<center><div style='margin-top:50px;'><div id='msg' class='alert'></div><div style='float:right;'><a href='?'>Back</a></div><table id ='Tb2' class='tbl-qa' cellspacing='0' width='80%' role='grid' >
+<center><div style='margin-top:50px;'><div style='float:right;'><a href='?'>Back</a></div><table id ='Tb2' class='tbl-qa' cellspacing='0' width='80%' role='grid' >
 <tbody>
 <?php   
                         if(isset($_GET['ref'])){$id=deStr($_GET['ref']);}else{$id='0';}
@@ -447,10 +447,10 @@ While ($rs=mysql_fetch_assoc($queryp)){
                         $column = @array_keys($row);
                         if(sizeof($column)==0){echo '<tr role ="row"><th colspan=2><center>:) <br><br>Go back and click ---> <img src="assets/img/copy.gif"> <--</center></th></tr>';}
                        For ($i= 0; $i<sizeof($column); $i++){$ColumnHeaderText=$column[$i];
-          // echo '<tr role ="row" class="table-row"><th class="table-header">'.$ColumnHeaderText.'</th><td contenteditable="true" onBlur="saveToDatabase(this,\''.$ColumnHeaderText.'\','.enStr($id).')" onClick="showEdit(this);">'.$row[$ColumnHeaderText].'</td></tr>';
                                 echo '<tr role ="row" data-row-id="'.$id.'" class="table-row">
-								<th class="table-header" valign="top">'.$ColumnHeaderText.'</th>
-								<td class="editable-col" contenteditable="'.($ColumnHeaderText=='id'?'false':'true').'" oldVal="'.$row[$ColumnHeaderText].'" Col ="'.$ColumnHeaderText.'" >'.trim($row[$ColumnHeaderText]).'</td></tr>';	
+                      								<th class="table-header" valign="top">'.toName($ColumnHeaderText).'</th>
+                      								<td class="editable-col" contenteditable="'.($ColumnHeaderText=='id'?'false':'true').'" 
+                                      oldVal="'.$row[$ColumnHeaderText].'" Col ="'.$ColumnHeaderText.'" >'.trim($row[$ColumnHeaderText]).'</td></tr>';	
                         
       }	?>
 </tbody></table> </div></center>

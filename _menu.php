@@ -30,7 +30,7 @@ nav ul ul ul {          position: absolute; left: 100%; top:0;  }
 
 <nav>
     <ul>
-        <li><a href="#">Menu</a>
+        <li><a href="Menu.php">Menu</a>
                 <ul>
             <?php 
             $queryp=@mysql_query('SELECT * FROM `a_accesslist` where empfid='.$_SESSION['eid']) or die ('query failed');
