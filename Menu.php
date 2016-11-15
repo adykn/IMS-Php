@@ -10,5 +10,5 @@ $area='Check'; include_once "Commander.php";$Access= str_split($_SESSION["Access
  
 
  <div id="copyright" style='position: fixed;  bottom: 45px; right: 20px;  margin: auto;  font-size: 8pt;  color: #c0c0c0;  opacity: 0.5;'>            
-            Copyright 2016 <a href="#">Adykn</a>. This is Open Source. For license details and to get the code 
+            Copyright 2016 <a href="https://github.com/adykn">Adykn</a>. This is Open Source. For license details and to get the code 
  </div>
