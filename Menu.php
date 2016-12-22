@@ -91,6 +91,7 @@ git push   <br>
  <div id="copyright" style='position: fixed;  bottom: 45px; right: 20px;  margin: auto;  font-size: 8pt;  color: #c0c0c0;  opacity: 0.5;'>            
             Copyright 2016 <a href="https://github.com/adykn">Adykn</a>. This is Open Source. For license details and to get the code 
  </div>
+<<<<<<< HEAD
 
  <script type="text/javascript">
     var arr = [<?php echo GetKeyWord()?>]; 
@@ -123,3 +124,5 @@ git push   <br>
     }    
 
     </script>
+=======
+>>>>>>> 37d545c0ffbbf0699c34e25ddf05e4f54bcff9a6
