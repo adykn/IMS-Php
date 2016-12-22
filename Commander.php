@@ -194,7 +194,8 @@ $department=$rs['department'];
 		$_SESSION['level']=$Level;
 		$_SESSION['enc']=$Enc;
 		$_SESSION['department']=$department;
-		
+		$_SESSION['breadcrumb']=array('Sign Out' => "Commander.php?s=2");
+
 		$result = array();
 		$res = mysql_query("Select * from a_accesslist where empfid='".$eid."'");
 		while($row = mysql_fetch_array($res, MYSQL_NUM)){$result[]=$row;}

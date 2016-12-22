@@ -3,6 +3,7 @@
                 $currentFile = $_SERVER['PHP_SELF'];$parts = Explode('/', $currentFile);$PageName=$parts[sizeof($parts) - 1];
                 $PageInfo=array('id'=>$pageinfo,'PName'=>$PageName,'C'=>'1','R'=>'1','U'=>'1','D'=>'1','G'=>'1');
                 $area='Check'; @include_once 'Commander.php';$Access= str_split($_SESSION['Access']);@include_once '_menu.php';
+               Breadcrumbs($pageinfo,$currentFile);
                 //var_dump($Access);?>
             <?php include_once 'Functions.php';@session_start(); ?> 
 

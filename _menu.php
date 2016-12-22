@@ -33,25 +33,10 @@ nav ul ul ul {          position: absolute; left: 100%; top:0;  }
         <li><a href="Menu.php">Menu</a>
                 <ul>
             <?php 
-            $queryp=@mysql_query('SELECT * FROM `a_accesslist` where empfid='.$_SESSION['eid']) or die ('query failed');
-            While ($rs=mysql_fetch_assoc($queryp)){
-                $cond='id='.$rs["pagefid"];
-                $addtomenu=getVal('a_pageinfo','addtomenu',$cond);
-            if($addtomenu==1){  
-            $urlname=getVal('a_pageinfo','urlname',$cond);
-            $pageid=getVal('a_pageinfo','pageid',$cond);
-            echo "<li><a href='".$urlname."?'>".$pageid."</a>";
-            //echo "<ul>";
-            //echo "<li><a>asdf</a></li>"
-            //echo "<li><a>asdf</a></li>"
-            //echo "<li><a>asdf</a></li>"
-            //echo "</ul>";
-            echo "</li>";
-            }
-            }
+                createLink();
             ?>
             
-            <li><a href="#">Setting</a>
+            <li><a href="#">Misc</a>
                      <ul>
                         <li><a href='Commander.php?s=3'>PCC</a></li> 
                         <li><a href='Commander.php?s=4'>Dir</a></li> 
@@ -63,18 +48,35 @@ nav ul ul ul {          position: absolute; left: 100%; top:0;  }
         
     </ul>
 </nav> 
+<?php
+function createLink($sublink=0){
 
+    $queryp=@mysql_query('SELECT * FROM `a_pageinfo` where addtomenu=1 and submenuid='.$sublink) or die ('query failed');
+            While ($rs=mysql_fetch_assoc($queryp)){
+                       
+            echo "<li><a href='".$rs['urlname']."?'>".$rs['pageid']."</a>";
+            echo "<ul>"; 
+                    createLink($rs['id']); 
+            echo "</ul>";
+            echo "</li>";
+            }
+}
 
+?>
 
-<div class="breadcrumb">
-  <a class="breadcrumb-item" href="#">Home</a> /
-  <a class="breadcrumb-item" href="#">Logistics</a> /
-  <a class="breadcrumb-item" href="#">IT</a> /
-  <span class="breadcrumb-item active">Item Card</span> /
+<div class="breadcrumb" id="breadcrumb" style="background: rgba(255, 255, 255, .5);">
+<?php 
+foreach ($_SESSION['breadcrumb'] as $key => $value)
+{
+   echo ' <a class="breadcrumb-item" href="'.$value.'">'.$key.'</a> /';   
+}
+
+?>
+  <!--<span class="breadcrumb-item active">Item Card</span> / -->
 </div>
 
 
-<div class="footer navbar-fixed-bottom " style="padding:10px;background:#f7f7f7;text-align:right;">
+<div class="footer navbar-fixed-bottom " style="padding:10px;background: rgba(255, 255, 255, .5);;text-align:right;">
 <a href="Commander.php?s=3"  style="margin-right:25px;margin-left:25px;">PCC</a> 
 <a href="Commander.php?s=2" style="margin-right:25px;margin-left:25px;" >Sign Out</a>
 </div>

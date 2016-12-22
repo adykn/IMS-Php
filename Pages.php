@@ -3,6 +3,7 @@
                 $currentFile = $_SERVER['PHP_SELF'];$parts = Explode('/', $currentFile);$PageName=$parts[sizeof($parts) - 1];
                 $PageInfo=array('id'=>$pageinfo,'PName'=>$PageName,'C'=>'1','R'=>'1','U'=>'1','D'=>'1','G'=>'1');
                 $area='Check'; @include_once 'Commander.php';$Access= str_split($_SESSION['Access']);@include_once '_menu.php';
+                Breadcrumbs($pageinfo,$currentFile);
                 //var_dump($Access);?>
             <?php include_once 'Functions.php';@session_start(); ?> 
 
@@ -192,7 +193,7 @@ While ($rs=mysql_fetch_assoc($queryp)){
 <strong><?php echo @$preMsg; ?></strong> <?php echo @$msg?>
 </div><?php }?>
 <Form Class="form-horizontal" role="form" id='theForm' action="?" method="POST" >
-<h2> Registration Form</h2><hr>
+<h2> New Entry Form</h2><hr>
 <input type='text' name='Ssid' value='<?php echo $Ssid;?>'  style='float:right;text-align:center;margin:5px' readonly><br><br><input type='hidden' name='id' value='<?php echo $id;?>'>
 <div Class="form-group">
 <Label for="Pageid" class="col-sm-3 control-label">Pageid</label>
@@ -220,12 +221,12 @@ While ($rs=mysql_fetch_assoc($queryp)){
 <div Class="col-sm-6">
 <div Class="row"><div Class="col-sm-4">
 <Label Class="radio-inline">
-<input type = "radio" name="addtomenu" id="0" value="0" checked>0
+<input type = "radio" name="addtomenu" id="0" value="0" <?php echo ($addtomenu==0?'Checked':'');?> >0 : No
 </label>
 </div>
 <div Class="col-sm-4">
 <Label Class="radio-inline">
-<input type = "radio" name="addtomenu" id="1" value="1" >1
+<input type = "radio" name="addtomenu" id="1" value="1" <?php echo ($addtomenu==1?'Checked':'');?> >1 : Yes
 </label>
 </div>
 </div>
@@ -235,9 +236,21 @@ While ($rs=mysql_fetch_assoc($queryp)){
 <div Class="form-group">
 <Label for="Submenuid" class="col-sm-3 control-label">Submenuid</label>
 <div Class="col-sm-9">
-<input type='text'  id="submenuid"  name="submenuid" placeholder="Submenuid" Class="form-control required "  value="<?php echo $submenuid;?>">
+<Select id="submenuid" name="submenuid" Class="form-control">
+       <?php
+       
+       $sql="select id as A, pageid as B  from a_pageinfo WHERE addtomenu=1 ";//and submenuid=0
+       $queryp=@mysql_query($sql) or die ('query failed');
+       //$num_rows = mysql_num_rows($queryp);
+       //If ($num_rows == 0) {         }
+       echo '<option value="0">Please Select</option>';         
+       while($rs=mysql_fetch_assoc($queryp)){  ?>
+       <option value='<?php echo $rs['A'];?>' <?php if ($submenuid==$rs['A']){echo "Selected";}?> ><?php echo $rs['B'];?></Option>
+       <?php }?>
+</select>
 </div>
 </div>
+
 
 <div class="form-group">
 <div class="col-sm-9 col-sm-offset-3">
